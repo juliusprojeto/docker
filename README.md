@@ -679,3 +679,21 @@ Ambiente docker
 </tbody>
 </table>
 <p><br /><br /></p>
+
+
+<table style="border-collapse: collapse; width: 100%;" border="1">
+<tbody>
+<tr>
+<td style="width: 100%;">DOCKER WORDPRESS</td>
+</tr>
+<tr>
+<td style="width: 100%;">
+<p>version: '3.3'</p>
+<p>services:<br />mysql_db:<br />container_name: mysql_container<br />image: mysql:8.0<br />restart: always<br />environment:<br />MYSQL_ROOT_PASSWORD: senha<br />MYSQL_DATABASE: wordpress_database<br />MYSQL_USER: wordpress_user<br />MYSQL_PASSWORD: Olaf4ever<br />volumes:<br />- mysql_vol:/var/lib/mysql</p>
+<p>wordpress:<br />depends_on:<br />- mysql_db<br />ports:<br />- 80:80<br />image: wordpress:latest<br />restart: always<br />environment:<br />WORDPRESS_DB_HOST: mysql_db:3306<br />WORDPRESS_DB_USER: wordpress_user<br />WORDPRESS_DB_PASSWORD: senha<br />WORDPRESS_DB_NAME: wordpress_database<br />volumes:<br />["./:/var/www/html"]</p>
+<p>nginx:<br />depends_on:<br />- wordpress<br />image: nginx<br />volumes:<br />- nginx:/etc/nginx/conf.d<br />- data:/var/www/html</p>
+<p>volumes:<br />mysql_vol: {}<br />nginx: {}<br />data: {}</p>
+</td>
+</tr>
+</tbody>
+</table>
